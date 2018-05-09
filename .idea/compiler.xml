@@ -18,17 +18,17 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="cjb" target="1.7" />
-      <module name="gkk" target="1.7" />
-      <module name="lx" target="1.7" />
-      <module name="mn" target="1.7" />
-      <module name="parent" target="1.7" />
-      <module name="ssh-online-manager" target="1.7" />
-      <module name="util" target="1.7" />
-      <module name="wb" target="1.7" />
+      <module name="cjb" target="1.5" />
+      <module name="gkk" target="1.5" />
+      <module name="lx" target="1.5" />
+      <module name="mn" target="1.5" />
+      <module name="parent" target="1.5" />
+      <module name="ssh-online-manager" target="1.5" />
+      <module name="util" target="1.5" />
+      <module name="wb" target="1.5" />
       <module name="webapp" target="1.7" />
-      <module name="yq" target="1.7" />
-      <module name="zht" target="1.7" />
+      <module name="yq" target="1.5" />
+      <module name="zht" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
