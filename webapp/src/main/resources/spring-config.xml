@@ -31,7 +31,7 @@
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
     	<property name="driverClass"><value>com.mysql.jdbc.Driver</value></property>
-        <property name="jdbcUrl"><value>jdbc:mysql://localhost:3306/1711</value></property>
+        <property name="jdbcUrl"><value>jdbc:mysql://192.168.3.121:3306/online</value></property>
         <property name="user"><value>root</value></property>
         <property name="password"><value>root</value></property>
     </bean>
@@ -56,6 +56,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.jk.bean.User</value>
+				<value>com.jk.bean.Tree</value>
 			</list>
 		</property>
 	</bean>
