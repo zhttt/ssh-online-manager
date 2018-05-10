@@ -23,6 +23,18 @@
     </properties>
 
     <dependencies>
+        <!-- 加入fastjson依赖包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.1.24</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
         <!-- Junit依赖 -->
         <dependency>
             <groupId>junit</groupId>
