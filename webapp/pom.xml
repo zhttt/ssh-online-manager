@@ -41,6 +41,11 @@
         </dependency>
         <dependency>
             <groupId>com.jk</groupId>
+            <artifactId>yq</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jk</groupId>
             <artifactId>zht</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
