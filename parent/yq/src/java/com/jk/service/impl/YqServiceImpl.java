@@ -1,5 +1,6 @@
 package com.jk.service.impl;
 
+import com.jk.bean.Orders;
 import com.jk.dao.YqDao;
 import com.jk.service.YqService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,5 +15,13 @@ public class YqServiceImpl implements YqService{
 
     public List queryOrder() {
         return yqdao.queryOrder();
+    }
+
+    public void deleteOrder(String ids) {
+        yqdao.deleteOrder(ids);
+    }
+
+    public void addorder(Orders orders) {
+        yqdao.addorder(orders);
     }
 }

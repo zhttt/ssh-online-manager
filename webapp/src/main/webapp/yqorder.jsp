@@ -11,44 +11,108 @@
 <head>
     <title>Title</title>
 </head>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/js/jquery-easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/js/jquery-easyui/themes/icon.css">
+<!-- tree树 -->
+
 <body>
-<a href="<%=request.getContextPath()%>/order!queryOrder.action">111</a>
-<table border="1">
-    <tr>
-        <th>id</th>
-        <th>订单编号</th>
-        <th>创建时间</th>
-        <th>总钱数</th>
-        <th>订单的产品</th>
-        <th>订单中的产品的数量</th>
-        <th>订单状态</th>
-        <th>订单人id</th>
-        <th>修改时间</th>
-        <th>操作</th>
-    </tr>
-<c:forEach items="${list}" var="h">
-        <tr>
-            <td>${h.ordersid}</td>
-            <td>${h.orderscode}</td>
-            <td>${h.orderscreattime}</td>
-            <td>${h.ordersmoney}</td>
-            <td>${h.ordersproduct}</td>
-            <td>${h.orderspronum}</td>
-            <td>${h.ordersstatus}</td>
-            <td>${h.ordersuser}</td>
-            <td>${h.ordersupdatadata}</td>
-            <td><input type="button" value="删除" onclick="fff(${h.ordersid})"><input type="button" value="修改" onclick="ddd(${h.ordersid})"></td>
-        </tr>
-</c:forEach>
-</table>
+<table id="y_goods"></table>
+<div id="y_ta">
+    <a href="javascript:shangg()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">修改</a>
+    <a href="javascript:shangg()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+    <a href="javascript:dely(null)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+</div>
+<div id="shangping"></div>
+
 <script type="application/javascript">
-        function fff(id){
+    //查询
+    $('#y_goods').datagrid({
+        url:'<%=request.getContextPath() %>/order!queryOrder.action',
+        columns:[[
+            {field:'',title:'',checkbox:true},
+            {field:'ordersid',title:'id',width:100 },
+            {field:'orderscode',title:'订单编号 ',width:100 },
+            {field:'orderscreattime',title:'创建时间',width:100 ,formatter:function(value,row,index){   //关键：格式化，并返回一个img标签
+                var aa=value.substr(0,10);
+                return aa; }},
+            {field:'ordersmoney',title:' 总钱数 ',width:100 },
+            {field:'ordersproduct',title:'订单的产品',width:100 },
+            {field:'orderspronum',title:'订单中的产品的数量',width:100 },
+            {field:'ordersstatus',title:'订单状态 ',width:100 },
+            {field:'ordersuser',title:'订单人id ',width:100 },
+            {field:'ordersupdatadata',title:'修改时间',width:100,formatter:function(value,row,index){   //关键：格式化，并返回一个img标签
+                var aa=value.substr(0,10);
+                return aa; }}
 
-        }
-        function ddd(id){
-            alert(id)
-        }
+        ]],
+        fit:true,
+        striped:true,
+        pagination:true,
+        ctrlSelect:true,
+        pageList:[10,15,20],
+        toolbar:'#y_ta'
+    });
+
 </script>
+//删除
+<script type="text/javascript">
+    function dely(){
+        var ids="";
+        //获取所有被选中的行
+        var arr = $("#y_goods").datagrid("getSelections");
+        for (var i = 0; i < arr.length; i++) {
+            ids+=","+arr[i].ordersid;
+        }
+        ids = ids.substr(1);
 
+        $.ajax({
+            url:"<%=request.getContextPath()%>/order!deleteOrder.action",
+            type:"post",
+            data:{"ids":ids},
+            dataType:"json",
+            async:false,
+            success:function(data){
+                if(data=="success"){
+                    $('#y_goods').datagrid('load');
+                }else{
+                    $.messager.alert("删除失败！");
+                }
+            }
+        })
+    }
+</script>
+<script type="text/javascript">
+    function shangg(){
+        $('#shangping').dialog({
+            title: "新增信息",
+            width: 300,
+            height: 300,
+            closed: false,
+            cache: false,
+            href: "<%=request.getContextPath()%>/yqaddorder.jsp",
+            modal: true,
+            buttons:[{
+                text:'保存',
+                handler:function(){
+                    $("#addqiangge").form('submit',{
+                        url:"<%=request.getContextPath()%>/order!addOrder.action",
+                        success:function(data){
+                            var data = eval('(' + data + ')');
+                            if(data=="success"){
+                                $('#shangping').dialog('close');
+                                $('#y_goods').datagrid('load');
+                            }else{
+                                $.messager.alert("提示",data);
+                            }
+                        }
+                    });
+                }
+            }]
+        });
+    }
+</script>
 </body>
 </html>

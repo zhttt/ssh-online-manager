@@ -1,11 +1,12 @@
 package com.jk.bean;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "orders")
-public class Orders {
+public class Orders implements Serializable{
     @Id
     @Column(name = "ordersid")
     @GeneratedValue(strategy = GenerationType.AUTO)
